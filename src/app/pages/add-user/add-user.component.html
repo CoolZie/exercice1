@@ -1,0 +1,54 @@
+<div class="container p-4">
+    <main>
+      <div class="card p-5">
+        <div class="row">
+            <h1 class="mb-4">Ajout d'utilisateur</h1>
+            <div class="col">
+                <div class="input-group-sm mb-2">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="nom">
+                  </div>
+                  <div class="input-group-sm mb-2">
+                    <label for="username" class="form-label">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" id="username">
+                  </div>
+                  <div class="input-group-sm mb-2">
+                    <label for="matricule" class="form-label">Matricule</label>
+                    <input type="text" class="form-control" id="matricule">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="input-group-sm mb-2">
+                    <label for="prenoms" class="form-label">Prénom</label>
+                    <input type="text" class="form-control" id="prenoms">
+                  </div>
+                  <div class="input-group-sm mb-2">
+                    <label for="date_creation" class="form-label">Date de création</label>
+                    <input type="date" class="form-control" id="date_creation">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="input-group-sm mb-2">
+                    <label for="etat" class="form-label">Etat</label>
+                    <select class="form-control" name="etat" id="etat">
+                        <option selected></option>
+                        <option value="En validation">En validation</option>
+                        <option value="Validé">Validé</option>
+                        <option value="Rejeté">Rejeté</option>
+                    </select>
+                  </div>
+            </div>
+        </div>
+      </div>
+      <div class="card p-3 mt-2">
+        <div class="d-flex flex-row-reverse">
+          <button
+            type="button"
+            class="btn btn-warning btn-sm text-secondary"
+            >Enregistrer</button
+          >
+        </div>
+      </div>
+    </main>
+  </div>
+  

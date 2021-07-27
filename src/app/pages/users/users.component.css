@@ -1,0 +1,25 @@
+.valide {
+    background-color: #5BE881;
+  }
+  .rejected {
+    background-color: #FF0000;
+  }
+  .on-validation {
+    background-color: #FDB64D;
+  }
+  [class*="col"] {
+    background-clip: padding-box;
+    border: 20px solid transparent;
+}
+.align-th {
+    padding: 0.5rem 0.5rem
+}
+.btn-orange{
+    background-color: #ffaa0a;   
+     }
+.tr-border {
+    border-top: 1px solid #80808082
+}
+.badge{
+    padding: 6px; width: 75%
+}

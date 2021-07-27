@@ -1,0 +1,228 @@
+<div class="container mt-4">
+    <h3>Exercice 1</h3>
+  <main>
+    <div class="card p-5">
+      <table class="table table-borderless">
+        <thead>
+          <th class="align-th">ID</th>
+          <th class="align-th">Date de création</th>
+          <th class="align-th text-center">Etat</th>
+          <th class="align-th">Nom</th>
+          <th class="align-th">Prénom</th>
+          <th class="align-th">Nom utilisateur</th>
+          <th class="align-th">Matricule</th>
+          <th class="align-th text-center">Action</th>
+        </thead>
+        <tbody>
+          <tr
+            class="tr-border"
+            *ngFor="let user of users; let i = index"
+            [attr.data-index]="i"
+          >
+            <td>{{ user.id }}</td>
+            <td>{{ user.createdDate | date: "shortDate" }}</td>
+            <td class="text-center">
+              <span
+                class="badge"
+                [ngClass]="{
+                  valide: user.status == 'Validé',
+                  'on-validation': user.status == 'En validation',
+                  rejected: user.status == 'Rejeté'
+                }"
+                >{{ user.status }}</span
+              >
+            </td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.userName }}</td>
+            <td style="width: 20%">{{ user.registrationNumber }}</td>
+            <td class="text-center">
+              <i
+                style="cursor: pointer"
+                (click)="delete(i)"
+                class="bi bi-trash"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card p-3 mt-2">
+      <div class="d-flex flex-row-reverse">
+        <button
+          type="button"
+          (click)="openModal()"
+          class="btn btn-sm text-secondary btn-orange"
+        >
+          Ajouter un utilisateur
+        </button>
+      </div>
+    </div>
+
+  
+  </main>
+  <div
+  class="modal fade"
+  id="add-user"
+  aria-hidden="true"
+  aria-labelledby="add-user"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="border: 0px">
+        <h3 class="ps-3">Ajout d'utilisateurs</h3>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="content">
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="row justify-content-md-center">
+              <div class="col">
+                <div class="input-group-sm mb-2">
+                  <label for="nom" class="form-label">Nom</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="firstName"
+                    id="firstName"
+                    required
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                    userForm.get('firstName')?.touched &&
+                    userForm.get('firstName')?.hasError('required')
+                    "
+                  >
+                    Le nom est obligatoire
+                  </small>
+                </div>
+                <div class="input-group-sm mb-2">
+                  <label for="userName" class="form-label"
+                    >Nom d'utilisateur</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="userName"
+                    id="userName"
+                  />
+                </div>
+                <small
+                class="text-danger"
+                *ngIf="
+                userForm.get('userName')?.touched &&
+                userForm.get('userName')?.hasError('required')
+                "
+              >
+                Le nom d'utilisateur est obligatoire
+              </small>
+                <div class="input-group-sm mb-2">
+                  <label for="matricule" class="form-label"
+                    >Matricule</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="registrationNumber"
+                    id="registrationNumber"
+                  />
+                </div>
+                <small
+                class="text-danger"
+                *ngIf="
+                userForm.get('registrationNumber')?.touched &&
+                userForm.get('registrationNumber')?.hasError('required')
+                "
+              >
+                Le matricule est obligatoire
+              </small>
+              </div>
+              <div class="col">
+                <div class="input-group-sm mb-2">
+                  <label for="lastName" class="form-label">Prénom</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="lastName"
+                    id="lastName"
+                  />
+                </div>
+                <small
+                class="text-danger"
+                *ngIf="
+                userForm.get('lastName')?.touched &&
+                userForm.get('lastName')?.hasError('required')
+                "
+              >
+                Le prénom est obligatoire
+              </small>
+                <div class="input-group-sm mb-2">
+                  <label for="date_creation" class="form-label"
+                    >Date de création</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="createdDate"
+                    id="createdDate"
+                  />
+                </div>
+                <small
+                class="text-danger"
+                *ngIf="
+                userForm.get('createdDate')?.touched &&
+                userForm.get('createdDate')?.hasError('required')
+                "
+              >
+                La date de création est obligatoire
+              </small>
+              </div>
+              <div class="col">
+                <div class="input-group-sm mb-2">
+                  <label for="status" class="form-label">Etat</label>
+                  <select
+                    class="form-control"
+                    name="status"
+                    formControlName="status"
+                    id="status"
+                  >
+                    <option selected></option>
+                    <option value="En validation">En validation</option>
+                    <option value="Validé">Validé</option>
+                    <option value="Rejeté">Rejeté</option>
+                  </select>
+                </div>
+                <small
+                class="text-danger"
+                *ngIf="
+                userForm.get('status')?.touched &&
+                userForm.get('status')?.hasError('required')
+                "
+              >
+                L'etat du compte est obligatoire
+              </small>
+              </div>
+              <div class="d-flex flex-row-reverse">
+                <button
+                  style="width: 150px"
+                  type="submit"
+                  class="btn btn-orange btn-sm p-1 text-secondary"
+                >
+                  Enregistrer
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
